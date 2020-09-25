@@ -1,0 +1,14 @@
+version: 0.1
+python: 3.6
+entrypoint: python runway_model.py
+cuda: 9.2
+spec:
+    cpu: False
+    gpu: True    
+files:
+  ignore:
+    - checkpoints/*
+build_steps:
+    - pip install runway-python tensorflow scikit-image==0.14.5 opencv-python tqdm
+    - if_cpu: pip install tensorflow
+    - if_gpu: pip install tensorflow-gpu==1.15
