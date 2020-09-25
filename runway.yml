@@ -9,6 +9,4 @@ files:
   ignore:
     - checkpoints/*
 build_steps:
-    - pip install runway-python tensorflow scikit-image==0.14.5 opencv-python tqdm
-    - if_cpu: pip install tensorflow
-    - if_gpu: pip install tensorflow-gpu==1.15
+    - pip install runway-python torch torchvision scikit-image==0.14.5 opencv-python tqdm face_alignment
