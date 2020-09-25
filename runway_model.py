@@ -1,16 +1,15 @@
 import runway
+from runway.data_types import file
 import numpy as np
-import tensorflow as tf
 from PIL import Image
 from infer import InferenceWrapper
-
 import argparse
 from infer import InferenceWrapper
 
 
 args_dict = {
     'project_dir': '.',
-    'init_experiment_dir': './vc2-hq_adrianb_paper_main',
+    'init_experiment_dir': file(is_directory=True),
     'init_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator',
     'init_which_epoch': '2225',
     'num_gpus': 1,
@@ -24,7 +23,6 @@ args_dict = {
 def setup(opts):
   return InferenceWrapper(opts)
 
-    
 # translate is the function that is called when you input a image, specify the input and output types
 @runway.command('translate', inputs={'source_imgs': runway.image, "target_imgs": runway.image}, outputs={'image': runway.image})
 def translate(net, inputs):

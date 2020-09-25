@@ -9,4 +9,4 @@ files:
   ignore:
     - checkpoints/*
 build_steps:
-    - pip install runway-python torch torchvision scikit-image==0.14.5 opencv-python tqdm face_alignment
+    - pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
