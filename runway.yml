@@ -1,5 +1,5 @@
 version: 0.1
-python: 3.6
+python: 3.7
 entrypoint: python runway_model.py
 cuda: 9.2
 spec:
@@ -9,7 +9,5 @@ files:
   ignore:
     - checkpoints/*
 build_steps:
-    #- pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
-    - pip install -r requirements.txt
-
-    
+    - apt install libgl1-mesa-glx
+    - pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
