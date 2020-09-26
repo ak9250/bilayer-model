@@ -9,5 +9,6 @@ files:
   ignore:
     - checkpoints/*
 build_steps:
+    - apt update -y
     - apt install libgl1-mesa-glx -y
     - pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
