@@ -11,3 +11,5 @@ files:
 build_steps:
     #- pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
     - pip install -r requirements.txt
+
+    
