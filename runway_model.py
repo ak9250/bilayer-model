@@ -23,10 +23,6 @@ args_dict = {
 @runway.setup(options=args_dict)
 def setup(opts):
 
-    # v =  {  
-    
-    # }
-    # args_dict.update(v)
     return InferenceWrapper(opts)
 
 # translate is the function that is called when you input a image, specify the input and output types
