@@ -1,5 +1,5 @@
 import runway
-from runway.data_types import file, text, number
+from runway.data_types import file, text, number, boolean
 import numpy as np
 from PIL import Image
 from infer import InferenceWrapper
@@ -15,17 +15,18 @@ args_dict = {
     'num_gpus':  number(default=1, min=0, max=10),
     'experiment_name': text(default="vc2-hq_adrianb_paper_enhancer"), 
     'which_epoch':  text(default="1225"),  
-    'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"), 
+    'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
+    'enh_apply_masks': boolean(default=False),
+    'inf_apply_masks': boolean(default=False) 
 }
 
 @runway.setup(options=args_dict)
 def setup(opts):
 
-    v =  {  
-    'enh_apply_masks': False,
-    'inf_apply_masks': False
-    }
-    args_dict.update(v)
+    # v =  {  
+    
+    # }
+    # args_dict.update(v)
     return InferenceWrapper(opts)
 
 # translate is the function that is called when you input a image, specify the input and output types
