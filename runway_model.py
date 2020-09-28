@@ -7,18 +7,18 @@ import argparse
 from infer import InferenceWrapper
 
 
-args_dict = {
-    'project_dir':  text(default="."),
-    'init_experiment_dir': file(is_directory=True),
-    'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
-    'init_which_epoch': text(default="2225"),
-    'num_gpus':  number(default=1, min=0, max=10),
-    'experiment_name': text(default="vc2-hq_adrianb_paper_enhancer"), 
-    'which_epoch':  text(default="1225"),  
-    'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
-    'enh_apply_masks': boolean(default=False),
-    'inf_apply_masks': boolean(default=False) 
-}
+# args_dict = {
+#     'project_dir':  text(default="."),
+#     'init_experiment_dir': file(is_directory=True),
+#     'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
+#     'init_which_epoch': text(default="2225"),
+#     'num_gpus':  number(default=1, min=0, max=10),
+#     'experiment_name': text(default="vc2-hq_adrianb_paper_enhancer"), 
+#     'which_epoch':  text(default="1225"),  
+#     'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
+#     'enh_apply_masks': boolean(default=False),
+#     'inf_apply_masks': boolean(default=False) 
+# }
 
 @runway.setup(options=args_dict)
 def setup(opts):
