@@ -9,7 +9,7 @@ from infer import InferenceWrapper
 
 args_dict = {
     'project_dir':  text(default="."),
-    'init_experiment_dir': file(is_directory=True),
+    'init_experiment_dir': text(default="../runs/vc2-hq_adrianb_paper_main"),
     'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
     'init_which_epoch': text(default="2225"),
     'num_gpus':  number(default=1, min=0, max=10),
