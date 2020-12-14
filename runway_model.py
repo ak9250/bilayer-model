@@ -20,7 +20,7 @@ from infer import InferenceWrapper
 #     'inf_apply_masks': boolean(default=False) 
 # }
 
-@runway.setup(options=args_dict)
+#@runway.setup(options=args_dict)
 def setup(opts):
 
     return InferenceWrapper(opts)
