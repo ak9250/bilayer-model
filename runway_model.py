@@ -1,5 +1,5 @@
 import runway
-from runway.data_types import file, text, number, boolean
+from runway.data_types import file, text, number, boolean, directory
 import numpy as np
 from PIL import Image
 from infer import InferenceWrapper
@@ -8,6 +8,7 @@ from infer import InferenceWrapper
 
 
 args_dict = {
+    'checkpoint_dir': directory(default='../runs/vc2-hq_adrianb_paper_main'),
     'project_dir':  text(default="."),
     'init_experiment_dir': text(default="../runs/vc2-hq_adrianb_paper_main"),
     'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
