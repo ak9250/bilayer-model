@@ -17,7 +17,8 @@ args_dict = {
     # 'which_epoch':  text(default="1225"),  
     # 'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
     # 'enh_apply_masks': boolean(default=False),
-    'inf_apply_masks': boolean(default=False) 
+    'inf_apply_masks': boolean(default=False)
+    #
 }
 
 @runway.setup(options=args_dict)
