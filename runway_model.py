@@ -8,15 +8,15 @@ import argparse
 args_dict = {
     # 'checkpoint': directory(default="../runs/vc2-hq_adrianb_paper_main"),
     # 'checkpoint_dir': file(is_directory=True),
-    'project_dir':  directory(default="."),
-    'init_experiment_dir': directory(default="../runs/vc2-hq_adrianb_paper_main/"),
-    'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
-    'init_which_epoch': text(default="2225"),
-    'num_gpus':  number(default=1, min=0, max=10),
-    'experiment_name': text(default="vc2-hq_adrianb_paper_enhancer"), 
-    'which_epoch':  text(default="1225"),  
-    'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
-    'enh_apply_masks': boolean(default=False),
+    # 'project_dir':  directory(default="."),
+    # 'init_experiment_dir': directory(default="../runs/vc2-hq_adrianb_paper_main/"),
+    # 'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
+    # 'init_which_epoch': text(default="2225"),
+    # 'num_gpus':  number(default=1, min=0, max=10),
+    # 'experiment_name': text(default="vc2-hq_adrianb_paper_enhancer"), 
+    # 'which_epoch':  text(default="1225"),  
+    # 'spn_networks': text(default="identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer"),
+    # 'enh_apply_masks': boolean(default=False),
     'inf_apply_masks': boolean(default=False) 
 }
 
