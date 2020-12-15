@@ -6,10 +6,10 @@ from infer import InferenceWrapper
 import argparse
 
 args_dict = {
-    'checkpoint_dir': directory(default="../runs/vc2-hq_adrianb_paper_main"),
+    # 'checkpoint': directory(default="../runs/vc2-hq_adrianb_paper_main"),
     # 'checkpoint_dir': file(is_directory=True),
     'project_dir':  directory(default="."),
-    'init_experiment_dir': directory(default="../runs/vc2-hq_adrianb_paper_main"),
+    'init_experiment_dir': directory(default="../runs/vc2-hq_adrianb_paper_main/"),
     'init_networks':  text(default='identity_embedder, texture_generator, keypoints_embedder, inference_generator') ,
     'init_which_epoch': text(default="2225"),
     'num_gpus':  number(default=1, min=0, max=10),
