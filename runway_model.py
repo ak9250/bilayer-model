@@ -30,7 +30,7 @@ args_dict = {
     'enh_apply_masks': False,
     'inf_apply_masks': False}
 
-#@runway.setup(options=args_dict)
+@runway.setup #(options=args_dict)
 def setup():
 
     return InferenceWrapper(args_dict)
