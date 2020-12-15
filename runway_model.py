@@ -1,5 +1,5 @@
 import runway
-from runway.data_types import file, text, number, boolean, directory
+#from runway import file, text, number, boolean, directory
 import numpy as np
 from PIL import Image
 from infer import InferenceWrapper
@@ -20,7 +20,7 @@ import argparse
 
 args_dict = {
     'project_dir': '.',
-    'init_experiment_dir': '../runs/vc2-hq_adrianb_paper_main',
+    'init_experiment_dir': './runs/vc2-hq_adrianb_paper_main',
     'init_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator',
     'init_which_epoch': '2225',
     'num_gpus': 1,
