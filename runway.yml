@@ -3,8 +3,8 @@ python: 3.6
 entrypoint: python runway_model.py
 cuda: 9.2
 spec:
-    cpu: True
-    gpu: False    
+    cpu: False
+    gpu: True   
 files:
   ignore:
     - checkpoints/*
