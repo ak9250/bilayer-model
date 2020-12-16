@@ -23,10 +23,15 @@ def setup():
 
 @runway.command('translate', inputs={'source_imgs': runway.image, "target_imgs": runway.image}, outputs={'image': runway.image})
 def translate(module, inputs):
-    data_dict = module(np.array(inputs))
+    data_dict = {
+    'source_imgs': np.array(inputs['source_imgs']), # Size: H x W x 3, type: NumPy RGB uint8 image
+    'target_imgs': np.array(inputs['target_imgs']), # Size: NUM_FRAMES x H x W x 3, type: NumPy RGB uint8 images
+    }
+
+    data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
-    return Image.fromarray(imgs)
+    return Image.fromarray(np.uint8(imgs))
 
 if __name__ == '__main__':
     runway.run(port=8889)
