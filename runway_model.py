@@ -18,15 +18,15 @@ args_dict = {
 
 @runway.setup
 def setup():
-    print("setup running")
-    return InferenceWrapper(args_dict)
+    module = InferenceWrapper(args_dict)
+    return module
 
 @runway.command('translate', inputs={'source_imgs': runway.image, "target_imgs": runway.image}, outputs={'image': runway.image})
-def translate(net, inputs):
-    data_dict = net(inputs)
-    imgs = np.array(data_dict['pred_enh_target_imgs'])
+def translate(module, inputs):
+    data_dict = module(np.array(inputs))
+    imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
-    return imgs
+    return Image.fromarray(imgs)
 
 if __name__ == '__main__':
     runway.run(port=8889)
