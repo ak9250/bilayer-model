@@ -5,7 +5,6 @@ from infer import InferenceWrapper
 import argparse
 import torch
 from torchvision import transforms
-import cv2
 
 args_dict = {
     'project_dir': '.',
@@ -19,8 +18,9 @@ args_dict = {
     'enh_apply_masks': False,
     'inf_apply_masks': False}
 
-@runway.setup
-def setup():
+@runway.setup(options={'checkpoint_dir': runway.directory})
+def setup(opts):
+    args_dict['init_experiment_dir'] = opts['checkpoint_dir']
     module = InferenceWrapper(args_dict)
     return module
 

@@ -12,3 +12,6 @@ build_steps:
     - apt update -y
     - apt install libgl1-mesa-glx -y
     - pip install runway-python torch torchvision opencv-python tqdm face_alignment networkx
+    # - pip install gdown
+    # - gdown https://drive.google.com/uc?id=1GJTKgI_vYldOTsrFWN_mEJ8dYPe_q_7Q
+    # - 
