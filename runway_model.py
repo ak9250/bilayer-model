@@ -5,8 +5,7 @@ from infer import InferenceWrapper
 import argparse
 import torch
 from torchvision import transforms
-
-
+import cv2
 
 args_dict = {
     'project_dir': '.',
@@ -25,6 +24,15 @@ def setup():
     module = InferenceWrapper(args_dict)
     return module
 
+def to_image(img_tensor, seg_tensor=None):
+    img_array = ((img_tensor.clamp(-1, 1).cpu().numpy() + 1) / 2).transpose(1, 2, 0) * 255
+    
+    if seg_tensor is not None:
+        seg_array = seg_tensor.cpu().numpy().transpose(1, 2, 0)
+        img_array = img_array * seg_array + 255. * (1 - seg_array)
+
+    return Image.fromarray(img_array.astype('uint8'))
+
 @runway.command('translate', inputs={'source_imgs': runway.image, "target_imgs": runway.image}, outputs={'image': runway.image})
 def translate(module, inputs):
 
@@ -35,16 +43,8 @@ def translate(module, inputs):
     data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
-    # random_array = np.roll(imgs.cpu(), -1, 1) * 255
-    # random_array = random_array.astype(np.uint8)
-    # random_image = Image.fromarray(random_array)
-    # imgt = np.transpose(imgs.cpu().detach().numpy(),(2,0,1))
-    # mean = np.mean(img,axis=3)
-    # tensor_to_pil = transforms.ToPILImage()(imgs.squeeze_(0))
-    np_img = np.squeeze(imgs, axis=2) 
-    np_img = transforms.ToPILImage()(np_img.squeeze_(0))
-    # result = Image.fromarray(np.uint8(imgs.cpu().detach().numpy()[:,:,:,-1]))
-    return Image.fromarray(np_img)
+    pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], data_dict['pred_target_segs'][0, 0])
+    return pred_img
 
 if __name__ == '__main__':
     runway.run(port=8889)
