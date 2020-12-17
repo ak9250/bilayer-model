@@ -1,4 +1,3 @@
-version: 0.1
 python: 3.6
 entrypoint: python runway_model.py
 cuda: 9.2
@@ -6,4 +5,4 @@ spec:
     cpu: False
     gpu: True
 build_steps:
-    - pip install -r req.txt
+    - pip install runway-python torch torchvision opencv-python tqdm face_alignment
