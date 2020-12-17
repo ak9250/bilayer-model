@@ -3,6 +3,8 @@ import numpy as np
 from PIL import Image
 from infer import InferenceWrapper
 import argparse
+import torch
+
 
 args_dict = {
     'project_dir': '.',
@@ -23,15 +25,19 @@ def setup():
 
 @runway.command('translate', inputs={'source_imgs': runway.image, "target_imgs": runway.image}, outputs={'image': runway.image})
 def translate(module, inputs):
+
     data_dict = {
     'source_imgs': np.array(inputs['source_imgs']), # Size: H x W x 3, type: NumPy RGB uint8 image
     'target_imgs': np.array(inputs['target_imgs']), # Size: NUM_FRAMES x H x W x 3, type: NumPy RGB uint8 images
     }
-
     data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
-    return Image.fromarray(np.uint8(imgs))
-
+    # random_array = np.roll(imgs.cpu(), -1, 1) * 255
+    # random_array = random_array.astype(np.uint8)
+    # random_image = Image.fromarray(random_array)
+    img = Image.fromarray((imgs.cpu().detach().numpy() * 255).astype(np.uint8))
+    return img
+    
 if __name__ == '__main__':
     runway.run(port=8889)
