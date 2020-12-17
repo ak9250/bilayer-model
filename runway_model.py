@@ -8,7 +8,7 @@ from torchvision import transforms
 import os.path
 
 args_dict = {
-    #'project_dir': '.',
+    # 'project_dir': '.',
     'init_experiment_dir': './runs/vc2-hq_adrianb_paper_main',
     'init_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator',
     'init_which_epoch': '2225',
@@ -21,8 +21,8 @@ args_dict = {
 
 @runway.setup(options={'checkpoint_dir': runway.directory})
 def setup(opts):
-    args_dict['init_experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_main')
-    args_dict['experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_enhancer')
+    # args_dict['init_experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_main')
+    # args_dict['experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_enhancer')
     module = InferenceWrapper(args_dict)
     return module
 
