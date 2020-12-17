@@ -22,7 +22,7 @@ class InferenceWrapper(nn.Module):
     @staticmethod
     def get_args(args_dict):
         # Read and parse args of the module being loaded
-        args_path = pathlib.Path(self.args.experiment_dir) / 'args.txt'
+        args_path = pathlib.Path(args_dict["experiment_dir"]) / 'args.txt'
 
         parser = argparse.ArgumentParser(conflict_handler='resolve')
         parser.add = parser.add_argument
