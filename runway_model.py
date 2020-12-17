@@ -4,6 +4,8 @@ from PIL import Image
 from infer import InferenceWrapper
 import argparse
 import torch
+from torchvision import transforms
+
 
 
 args_dict = {
@@ -36,8 +38,13 @@ def translate(module, inputs):
     # random_array = np.roll(imgs.cpu(), -1, 1) * 255
     # random_array = random_array.astype(np.uint8)
     # random_image = Image.fromarray(random_array)
-    img = Image.fromarray((imgs.cpu().detach().numpy() * 255).astype(np.uint8))
-    return img
-    
+    # imgt = np.transpose(imgs.cpu().detach().numpy(),(2,0,1))
+    # mean = np.mean(img,axis=3)
+    # tensor_to_pil = transforms.ToPILImage()(imgs.squeeze_(0))
+    np_img = np.squeeze(imgs, axis=2) 
+    np_img = transforms.ToPILImage()(np_img.squeeze_(0))
+    # result = Image.fromarray(np.uint8(imgs.cpu().detach().numpy()[:,:,:,-1]))
+    return Image.fromarray(np_img)
+
 if __name__ == '__main__':
     runway.run(port=8889)
