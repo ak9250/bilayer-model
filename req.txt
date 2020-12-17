@@ -37,7 +37,6 @@ runway-python==0.6.0
 scikit-image==0.17.2
 scipy==1.5.2
 six==1.15.0
-tifffile==2020.9.22
 torch==1.6.0
 torchvision==0.7.0
 tqdm==4.49.0
@@ -46,3 +45,4 @@ urllib3==1.25.10
 Werkzeug==1.0.1
 zope.event==4.5.0
 zope.interface==5.1.0
+runway-python
