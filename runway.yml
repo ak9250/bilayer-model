@@ -4,10 +4,7 @@ entrypoint: python runway_model.py
 cuda: 9.2
 spec:
     cpu: False
-    gpu: True   
-files:
-  ignore:
-    - checkpoints/*
+    gpu: True
 build_steps:
     - pip install runway-python
     - pip install -r req.txt
