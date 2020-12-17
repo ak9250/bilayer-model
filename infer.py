@@ -22,7 +22,7 @@ class InferenceWrapper(nn.Module):
     @staticmethod
     def get_args(args_dict):
         # Read and parse args of the module being loaded
-        args_path = pathlib.Path(args_dict['project_dir']) / 'runs' / args_dict['experiment_name'] / 'args.txt'
+        args_path = pathlib.Path(self.args.experiment_dir) / 'args.txt'
 
         parser = argparse.ArgumentParser(conflict_handler='resolve')
         parser.add = parser.add_argument
@@ -54,7 +54,7 @@ class InferenceWrapper(nn.Module):
         self.runner.eval()
 
         # Load pretrained weights
-        checkpoints_dir = pathlib.Path(self.args.project_dir) / 'runs' / self.args.experiment_name / 'checkpoints'
+        checkpoints_dir = pathlib.Path(self.args.experiment_dir) / 'checkpoints'
 
         # Load pre-trained weights
         init_networks = rn_utils.parse_str_to_list(self.args.init_networks) if self.args.init_networks else {}
