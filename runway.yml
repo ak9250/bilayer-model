@@ -6,7 +6,7 @@ spec:
     gpu: True
 build_steps:
     - apt-get update
-    - apt-get install ffmpeg libsm6 libxext6 unzip -y
-    - pip install runway-python torch torchvision opencv-python tqdm face_alignment gdown
-    - gdown https://drive.google.com/uc?id=1lkMYfdmqeDmyGM3Uh-u3RlI-BTRO9XIB
-    - unzip runs-20201217T182451Z-001.zip
+    - apt-get install ffmpeg libsm6 libxext6 -y
+    - pip install runway-python torch torchvision opencv-python tqdm face_alignment #gdown
+    # - gdown https://drive.google.com/uc?id=1lkMYfdmqeDmyGM3Uh-u3RlI-BTRO9XIB
+    # - unzip runs-20201217T182451Z-001.zip
