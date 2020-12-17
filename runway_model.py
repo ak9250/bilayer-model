@@ -5,10 +5,11 @@ from infer import InferenceWrapper
 import argparse
 import torch
 from torchvision import transforms
+import os.path
 
 args_dict = {
     'project_dir': '.',
-    'checkpoint_dir': './runs/vc2-hq_adrianb_paper_main',
+    'init_experiment_dir': './runs/vc2-hq_adrianb_paper_main',
     'init_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator',
     'init_which_epoch': '2225',
     'num_gpus': 1,
@@ -20,7 +21,7 @@ args_dict = {
 
 @runway.setup(options={'checkpoint_dir': runway.directory})
 def setup(opts):
-    args_dict['checkpoint_dir'] = opts['checkpoint_dir']
+    args_dict['init_experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_main')
     module = InferenceWrapper(args_dict)
     return module
 
