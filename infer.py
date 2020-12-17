@@ -60,10 +60,10 @@ class InferenceWrapper(nn.Module):
         init_networks = rn_utils.parse_str_to_list(self.args.init_networks) if self.args.init_networks else {}
         networks_to_train = self.runner.nets_names_to_train
 
-        if self.args.init_which_epoch != 'none' and self.args.init_experiment_dir:
+        if self.args.init_which_epoch != 'none' and self.args.checkpoint_dir:
             for net_name in init_networks:
                 self.runner.nets[net_name].load_state_dict(torch.load(
-                    pathlib.Path(self.args.init_experiment_dir) 
+                    pathlib.Path(self.args.checkpoint_dir) 
                         / 'checkpoints' 
                         / f'{self.args.init_which_epoch}_{net_name}.pth', 
                     map_location='cpu'))
