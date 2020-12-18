@@ -36,7 +36,8 @@ def to_image(img_tensor, seg_tensor=None):
 
     return Image.fromarray(img_array.astype('uint8'))
 
-@runway.command('translate', inputs={'source_imgs': runway.image(description='input image to be translated'), "target_imgs": runway.image(description='input image or video containing the target pose and expression')}, outputs={'image': runway.image(description='output image containing the translated result')})
+@runway.command('translate', inputs={'source_imgs': runway.image(description='input image to be translated'), "target_imgs": runway.image(description='input image or video containing the target pose and expression'), 
+"segmentation": runway.boolean(default=True),}, outputs={'image': runway.image(description='output image containing the translated result')})
 def translate(module, inputs):
 
     data_dict = {
@@ -46,7 +47,11 @@ def translate(module, inputs):
     data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
-    pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], data_dict['pred_target_segs'][0, 0])
+    if inputs['segmentation']:
+        pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], data_dict['pred_target_segs'][0, 0],)
+    else:
+        pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], None)
+
     return pred_img
 
 if __name__ == '__main__':
