@@ -1,5 +1,7 @@
 # Fast Bi-layer Neural Synthesis of One-Shot Realistic Head Avatars
 
+[![Open in RunwayML Badge](https://open-app.runwayml.com/gh-badge.svg)](https://open-app.runwayml.com/?model=akhaliq/bilayer-model)
+
 A project on the speed up of one-shot adversarially trained human pose to image translation models for mobile devices.
 
 <img src="https://saic-violet.github.io/bilayer-model/assets/teaser.png"/>
