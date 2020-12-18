@@ -19,7 +19,7 @@ class SegmentationWrapper(nn.Module):
         self.net = deeplab_xception_transfer.deeplab_xception_transfer_projection_savemem(
             n_classes=20, hidden_layers=128, source_classes=7)
         
-        x = torch.load(f'{args.project_dir}/pretrained_weights/graphonomy/pretrained_model.pth')
+        x = torch.load(f'{args.project_dir}/graphonomy/pretrained_model.pth')
         self.net.load_source_model(x)
 
         if self.use_gpus:

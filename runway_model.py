@@ -50,5 +50,4 @@ def translate(module, inputs):
     return pred_img
 
 if __name__ == '__main__':
-    runway.run(port=8889)
-    
+    runway.run(port=8889)    
