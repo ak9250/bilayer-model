@@ -19,11 +19,11 @@ args_dict = {
     'enh_apply_masks': False,
     'inf_apply_masks': False}
 
-@runway.setup(options={'checkpoint_dir': runway.directory, 'checkpoint_dir': runway.directory,})
+@runway.setup(options={'checkpoint_dir': runway.directory, 'checkpoint_dir2': runway.directory,})
 def setup(opts):
     args_dict['init_experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_main')
     args_dict['experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_enhancer')
-    args_dict['project_dir'] = opts['checkpoint_dir']
+    args_dict['project_dir'] = opts['checkpoint_dir2']
     module = InferenceWrapper(args_dict)
     return module
 
