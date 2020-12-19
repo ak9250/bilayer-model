@@ -17,7 +17,9 @@ args_dict = {
     'which_epoch': '1225',
     'spn_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer',
     'enh_apply_masks': False,
-    'inf_apply_masks': False}
+    'inf_apply_masks': False
+    
+}
 
 
 @runway.setup(options={'checkpoint_dir': runway.directory(description="runs folder"), 'checkpoint_dir2': runway.directory(description="pretrained weights") ,})
@@ -45,6 +47,10 @@ def translate(module, inputs):
     'source_imgs': np.array(inputs['source_imgs']), # Size: H x W x 3, type: NumPy RGB uint8 image
     'target_imgs': np.array(inputs['target_imgs']), # Size: NUM_FRAMES x H x W x 3, type: NumPy RGB uint8 images
     }
+
+    crop_dict = {
+        'cropping' : inputs['cropping'],
+    }
     data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
     segs = data_dict['pred_target_segs']
@@ -53,10 +59,9 @@ def translate(module, inputs):
     else:
         pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], None)
     if inputs['cropping']:
-        module = InferenceWrapper(inputs)
-    else:
-        inputs['cropping'] = False
-        module = InferenceWrapper(inputs)
+        data_dict = module(crop_dict)
+    else: 
+        data_dict = module(crop_dict)
 
     return pred_img
 
