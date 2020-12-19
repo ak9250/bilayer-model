@@ -19,6 +19,7 @@ args_dict = {
     'enh_apply_masks': False,
     'inf_apply_masks': False}
 
+
 @runway.setup(options={'checkpoint_dir': runway.directory(description="runs folder"), 'checkpoint_dir2': runway.directory(description="pretrained weights") ,})
 def setup(opts):
     args_dict['init_experiment_dir'] = os.path.join(opts['checkpoint_dir'], 'vc2-hq_adrianb_paper_main')
@@ -37,7 +38,7 @@ def to_image(img_tensor, seg_tensor=None):
     return Image.fromarray(img_array.astype('uint8'))
 
 @runway.command('translate', inputs={'source_imgs': runway.image(description='input image to be translated'), "target_imgs": runway.image(description='input image or video containing the target pose and expression'), 
-"segmentation": runway.boolean(default=True),}, outputs={'image': runway.image(description='output image containing the translated result')})
+"segmentation": runway.boolean(default=True), "cropping": runway.boolean(default=True), }, outputs={'image': runway.image(description='output image containing the translated result')})
 def translate(module, inputs):
 
     data_dict = {
@@ -51,6 +52,11 @@ def translate(module, inputs):
         pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], data_dict['pred_target_segs'][0, 0],)
     else:
         pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], None)
+    if inputs['cropping']:
+        module = InferenceWrapper(inputs)
+    else:
+        inputs['cropping'] = False
+        module = InferenceWrapper(inputs)
 
     return pred_img
 

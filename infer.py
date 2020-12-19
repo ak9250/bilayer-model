@@ -164,12 +164,12 @@ class InferenceWrapper(nn.Module):
         (source_poses, 
          source_imgs, 
          source_segs, 
-         source_stickmen) = self.preprocess_data(data_dict['source_imgs'], crop_data)
+         source_stickmen) = self.preprocess_data(data_dict['source_imgs'], self.args.cropping)
 
         (target_poses,
          target_imgs, 
          target_segs, 
-         target_stickmen) = self.preprocess_data(data_dict['target_imgs'], crop_data)
+         target_stickmen) = self.preprocess_data(data_dict['target_imgs'], self.args.cropping)
 
         data_dict = {
             'source_imgs': source_imgs,
