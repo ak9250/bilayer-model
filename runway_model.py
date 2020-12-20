@@ -17,10 +17,7 @@ args_dict = {
     'which_epoch': '1225',
     'spn_networks': 'identity_embedder, texture_generator, keypoints_embedder, inference_generator, texture_enhancer',
     'enh_apply_masks': False,
-    'inf_apply_masks': False
-    
-}
-
+    'inf_apply_masks': False}
 
 @runway.setup(options={'checkpoint_dir': runway.directory(description="runs folder"), 'checkpoint_dir2': runway.directory(description="pretrained weights") ,})
 def setup(opts):
@@ -40,16 +37,12 @@ def to_image(img_tensor, seg_tensor=None):
     return Image.fromarray(img_array.astype('uint8'))
 
 @runway.command('translate', inputs={'source_imgs': runway.image(description='input image to be translated'), "target_imgs": runway.image(description='input image or video containing the target pose and expression'), 
-"segmentation": runway.boolean(default=True), "cropping": runway.boolean(default=True), }, outputs={'image': runway.image(description='output image containing the translated result')})
+"segmentation": runway.boolean(default=True),}, outputs={'image': runway.image(description='output image containing the translated result')})
 def translate(module, inputs):
 
     data_dict = {
     'source_imgs': np.array(inputs['source_imgs']), # Size: H x W x 3, type: NumPy RGB uint8 image
     'target_imgs': np.array(inputs['target_imgs']), # Size: NUM_FRAMES x H x W x 3, type: NumPy RGB uint8 images
-    }
-
-    crop_dict = {
-        'cropping' : inputs['cropping'],
     }
     data_dict = module(data_dict)
     imgs = data_dict['pred_enh_target_imgs']
@@ -58,10 +51,6 @@ def translate(module, inputs):
         pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], data_dict['pred_target_segs'][0, 0],)
     else:
         pred_img = to_image(data_dict['pred_enh_target_imgs'][0, 0], None)
-    if inputs['cropping']:
-        data_dict = module(crop_dict)
-    else: 
-        data_dict = module(crop_dict)
 
     return pred_img
 

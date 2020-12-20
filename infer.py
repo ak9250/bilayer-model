@@ -156,7 +156,7 @@ class InferenceWrapper(nn.Module):
 
         return poses, imgs, segs, stickmen
 
-    def forward(self, data_dict, crop_data=True, no_grad=True):
+    def forward(self, data_dict, crop_data=False, no_grad=True):
         if 'target_imgs' not in data_dict.keys():
             data_dict['target_imgs'] = None
 
@@ -164,12 +164,12 @@ class InferenceWrapper(nn.Module):
         (source_poses, 
          source_imgs, 
          source_segs, 
-         source_stickmen) = self.preprocess_data(data_dict['source_imgs'], self.args.cropping)
+         source_stickmen) = self.preprocess_data(data_dict['source_imgs'], crop_data)
 
         (target_poses,
          target_imgs, 
          target_segs, 
-         target_stickmen) = self.preprocess_data(data_dict['target_imgs'], self.args.cropping)
+         target_stickmen) = self.preprocess_data(data_dict['target_imgs'], crop_data)
 
         data_dict = {
             'source_imgs': source_imgs,
